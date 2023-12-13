@@ -50,15 +50,20 @@ class CreateUIElements {
         return label
     }
     
-    static func makeSmallLabel(text: String, fontSize: CGFloat, fontWeight: UIFont.Weight) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.textColor = UIColor(hex: "ffffff")
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
-        label.layer.masksToBounds = false
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    static func makeSmallLabel(
+        text: String,
+        textColor: String,
+        fontSize: CGFloat,
+        fontWeight: UIFont.Weight
+    ) -> UILabel {
+            let label = UILabel()
+            label.text = text
+            label.textColor = UIColor(hex: "\(textColor)")
+            label.numberOfLines = 0
+            label.font = UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
+            label.layer.masksToBounds = false
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
     }
     
     static func makeButton(backgroundColor: UIColor, titleColor: UIColor, title: String) -> UIButton {

@@ -11,10 +11,14 @@ import Firebase
 class LoginViewModel {
     
     var navigationController: UINavigationController?
+    var showAlertClosure: ((String?) -> Void)?
     
     private var userName = ""
     private var userEmail = ""
     private var userPassword = ""
+    
+    private var loginUserEmail = ""
+    private var loginUserPassword = ""
     
     var isUserNameValid: ((Bool) -> ())!
     var isUserEmailValid: ((Bool) -> ())!
@@ -41,24 +45,32 @@ class LoginViewModel {
         ValidationFieldsHelper.isValidPassword(userPassword)
     }
     
-    func autorizeUser() {
-        Auth.auth().signIn(withEmail: self.userEmail, password: self.userPassword) { (result, error) in
+    func autorizeUser(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if error == nil {
-//                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
             }
         }
     }
     
-    func registerUser()  {
-        Auth.auth().createUser(withEmail: userEmail, password: userPassword) { (result, error) in
-            if error == nil {
-                if let result = result {
-                    print("New user with ID \(result.user.uid)")
-                    let reference = Database.database().reference().child("users")
-                    reference.child(result.user.uid).updateChildValues(["name": self.userName, "email": self.userEmail])
-                    self.navigationController?.pushViewController(HomeViewController(), animated: true)
+    func registerUser() {
+            Auth.auth().createUser(withEmail: userEmail, password: userPassword) { (result, error) in
+                if let error = error as? NSError {
+                    if error.domain == AuthErrorDomain && error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
+                        print("Error Email in use")
+                        self.showAlertClosure?("The email address is already in use by another account.")
+                    } else {
+                        print("Error creating user: \(error.localizedDescription)")
+                    }
+                } else {
+                    if let result = result {
+                        let reference = Database.database().reference().child("users")
+                        reference.child(result.user.uid).updateChildValues([
+                            "name": self.userName,
+                            "email": self.userEmail
+                        ])
+                    }
                 }
             }
         }
-    }
 }

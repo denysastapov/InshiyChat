@@ -46,6 +46,5 @@ class SideMenuCollectionViewCell: UICollectionViewCell {
             titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
-        
     }
 }

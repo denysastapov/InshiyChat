@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension HomeViewController: SideMenuViewControllerDelegate {
     func selectedCell(_ row: Int) {
@@ -13,6 +14,7 @@ extension HomeViewController: SideMenuViewControllerDelegate {
         case 0:
             // Home
             self.showViewController(viewController: HomeViewController())
+            break
         case 1:
             // Music
             break
@@ -29,8 +31,14 @@ extension HomeViewController: SideMenuViewControllerDelegate {
             // Settings
             self.showViewController(viewController: SettingsViewController())
         case 6:
-            // Like us on facebook
-            break
+            do {
+                try Auth.auth().signOut()
+                navigationController?.popViewController(animated: true)
+                navigationController?.isNavigationBarHidden = true
+                return
+            } catch {
+                print(error)
+            }
         default:
             break
         }
@@ -42,7 +50,6 @@ extension HomeViewController: SideMenuViewControllerDelegate {
         for subview in view.subviews {
             if subview.tag == 99 {
                 subview.removeFromSuperview()
-                (subview.superview as? UIViewController)?.didMove(toParent: nil)
             }
         }
         viewController.view.tag = 99

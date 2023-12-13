@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol SideMenuViewControllerDelegate: AnyObject {
     func selectedCell(_ row: Int)
@@ -18,29 +19,31 @@ struct SideMenuModel {
 
 class SideMenuViewController: UIViewController {
     
-//    var defaultHighlightedCell: Int = 0
     var delegate: SideMenuViewControllerDelegate?
     
-    private let userFirstNameLabel = CreateUIElements.makeSmallLabel(
+    var userFirstNameLabel = CreateUIElements.makeSmallLabel(
         text: "Tony",
+        textColor: "ffffff",
         fontSize: 22,
         fontWeight: .bold
     )
     
-    private let userNameLabel = CreateUIElements.makeSmallLabel(
+    var userNameLabel = CreateUIElements.makeSmallLabel(
         text: "@username",
+        textColor: "ffffff",
         fontSize: 14,
         fontWeight: .regular
     )
     
-    private let userPhoneNumberLabel = CreateUIElements.makeSmallLabel(
+    var userPhoneNumberLabel = CreateUIElements.makeSmallLabel(
         text: "+62812345678",
+        textColor: "ffffff",
         fontSize: 14,
         fontWeight: .regular
     )
     
-    private let userAvatarImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "Avatar"))
+    var userAvatarImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "profile_def"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -53,7 +56,7 @@ class SideMenuViewController: UIViewController {
         SideMenuModel(icon: UIImage(systemName: "book.fill")!, title: "Books"),
         SideMenuModel(icon: UIImage(systemName: "person.fill")!, title: "Profile"),
         SideMenuModel(icon: UIImage(systemName: "slider.horizontal.3")!, title: "Settings"),
-        SideMenuModel(icon: UIImage(systemName: "hand.thumbsup.fill")!, title: "Like us on facebook")
+        SideMenuModel(icon: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, title: "Log out")
     ]
     
     private let sideMenuCollectionView: UICollectionView = {

@@ -34,6 +34,9 @@
 		D51230092B1F1C0800D4AC7F /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D51230082B1F1C0800D4AC7F /* FirebaseRemoteConfigSwift */; };
 		D512300B2B1F1C0800D4AC7F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D512300A2B1F1C0800D4AC7F /* FirebaseStorage */; };
 		D512300D2B1F1C0800D4AC7F /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D512300C2B1F1C0800D4AC7F /* FirebaseStorageCombine-Community */; };
+		D54E84B12B28B94F00562726 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E84B02B28B94F00562726 /* HomeViewModel.swift */; };
+		D556AF312B278F6200B475A6 /* Extension+GetCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D556AF302B278F6200B475A6 /* Extension+GetCurrentUser.swift */; };
+		D556AF332B27A55E00B475A6 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D556AF322B27A55E00B475A6 /* HomeCollectionViewCell.swift */; };
 		D55F91682B1F8C8200A20EA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D55F91672B1F8C8200A20EA3 /* GoogleService-Info.plist */; };
 		D55F916A2B1FA4FE00A20EA3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D55F91692B1FA4FE00A20EA3 /* Launch Screen.storyboard */; };
 		D5C34E2F2B1F4527003C2DED /* CreateUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C34E2E2B1F4527003C2DED /* CreateUIElements.swift */; };
@@ -44,7 +47,7 @@
 		D5CC41E32B237B1C00534D23 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC41E22B237B1C00534D23 /* SideMenuViewController.swift */; };
 		D5CC41E52B237B6B00534D23 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC41E42B237B6B00534D23 /* HomeViewController.swift */; };
 		D5CC41EB2B24DB0C00534D23 /* Extension+GestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC41EA2B24DB0C00534D23 /* Extension+GestureRecognizer.swift */; };
-		D5CC41EE2B24DC6E00534D23 /* Extension+Tap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC41ED2B24DC6E00534D23 /* Extension+Tap.swift */; };
+		D5CC41EE2B24DC6E00534D23 /* Extension+SideViewMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC41ED2B24DC6E00534D23 /* Extension+SideViewMenu.swift */; };
 		D5CC41F02B24DDB100534D23 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC41EF2B24DDB100534D23 /* SettingsViewController.swift */; };
 		D5DA607C2B1E077A007CB832 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DA607B2B1E077A007CB832 /* AppDelegate.swift */; };
 		D5DA607E2B1E077A007CB832 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DA607D2B1E077A007CB832 /* SceneDelegate.swift */; };
@@ -79,6 +82,9 @@
 
 /* Begin PBXFileReference section */
 		D5122FD62B1F1B2900D4AC7F /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		D54E84B02B28B94F00562726 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		D556AF302B278F6200B475A6 /* Extension+GetCurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+GetCurrentUser.swift"; sourceTree = "<group>"; };
+		D556AF322B27A55E00B475A6 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D55F91672B1F8C8200A20EA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D55F91692B1FA4FE00A20EA3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "InshiyChat/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
 		D5C34E2E2B1F4527003C2DED /* CreateUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUIElements.swift; sourceTree = "<group>"; };
@@ -89,7 +95,7 @@
 		D5CC41E22B237B1C00534D23 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		D5CC41E42B237B6B00534D23 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D5CC41EA2B24DB0C00534D23 /* Extension+GestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+GestureRecognizer.swift"; sourceTree = "<group>"; };
-		D5CC41ED2B24DC6E00534D23 /* Extension+Tap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Tap.swift"; sourceTree = "<group>"; };
+		D5CC41ED2B24DC6E00534D23 /* Extension+SideViewMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+SideViewMenu.swift"; sourceTree = "<group>"; };
 		D5CC41EF2B24DDB100534D23 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D5DA60782B1E077A007CB832 /* InshiyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InshiyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DA607B2B1E077A007CB832 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -200,7 +206,6 @@
 		D5CC41F12B24E5BD00534D23 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D5CC41E42B237B6B00534D23 /* HomeViewController.swift */,
 				D5CC41EF2B24DDB100534D23 /* SettingsViewController.swift */,
 			);
 			path = View;
@@ -227,10 +232,37 @@
 		D5CC41F52B24E5FA00534D23 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				D5CC41ED2B24DC6E00534D23 /* Extension+Tap.swift */,
+				D5CC41ED2B24DC6E00534D23 /* Extension+SideViewMenu.swift */,
+				D556AF302B278F6200B475A6 /* Extension+GetCurrentUser.swift */,
 				D5CC41EA2B24DB0C00534D23 /* Extension+GestureRecognizer.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D5D81C792B2A2E70002C5E95 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D5D81C7A2B2A3244002C5E95 /* ViewModel */,
+				D5D81C7B2B2A3261002C5E95 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D5D81C7A2B2A3244002C5E95 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D54E84B02B28B94F00562726 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D5D81C7B2B2A3261002C5E95 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D5CC41E42B237B6B00534D23 /* HomeViewController.swift */,
+				D556AF322B27A55E00B475A6 /* HomeCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D5DA606F2B1E0779007CB832 = {
@@ -255,6 +287,7 @@
 				D5DA607B2B1E077A007CB832 /* AppDelegate.swift */,
 				D5DA607D2B1E077A007CB832 /* SceneDelegate.swift */,
 				D5CC41F12B24E5BD00534D23 /* View */,
+				D5D81C792B2A2E70002C5E95 /* Home */,
 				D5CC41F22B24E5DB00534D23 /* SideMenu */,
 				D55F916B2B220A8200A20EA3 /* Login */,
 				D5C34E352B1F6D25003C2DED /* Helpers */,
@@ -395,14 +428,17 @@
 			files = (
 				D5C34E2F2B1F4527003C2DED /* CreateUIElements.swift in Sources */,
 				D5DA60802B1E077A007CB832 /* LoginViewController.swift in Sources */,
-				D5CC41EE2B24DC6E00534D23 /* Extension+Tap.swift in Sources */,
+				D5CC41EE2B24DC6E00534D23 /* Extension+SideViewMenu.swift in Sources */,
 				D5CC41E32B237B1C00534D23 /* SideMenuViewController.swift in Sources */,
+				D556AF312B278F6200B475A6 /* Extension+GetCurrentUser.swift in Sources */,
 				D5C34E332B1F6BFE003C2DED /* KeyboardHelper.swift in Sources */,
 				D5CC41E52B237B6B00534D23 /* HomeViewController.swift in Sources */,
 				D5CC41EB2B24DB0C00534D23 /* Extension+GestureRecognizer.swift in Sources */,
 				D5CC41E12B237AE200534D23 /* SideMenuCollectionViewCell.swift in Sources */,
 				D5DA607C2B1E077A007CB832 /* AppDelegate.swift in Sources */,
 				D5CC41F02B24DDB100534D23 /* SettingsViewController.swift in Sources */,
+				D54E84B12B28B94F00562726 /* HomeViewModel.swift in Sources */,
+				D556AF332B27A55E00B475A6 /* HomeCollectionViewCell.swift in Sources */,
 				D5C34E312B1F6AD3003C2DED /* ValidationFieldsHelper.swift in Sources */,
 				D5DA607E2B1E077A007CB832 /* SceneDelegate.swift in Sources */,
 				D5C34E382B1F6DE4003C2DED /* LoginViewModel.swift in Sources */,
