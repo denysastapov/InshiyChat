@@ -11,21 +11,12 @@ class LoginViewController: UIViewController {
     
     var viewModel: LoginViewModel!
     
-    private let registrationMainLabel: UILabel = {
-        let label = CreateUIElements.makeBigLabel(
+    private let mainLabel: UILabel = {
+        CreateUIElements.makeBigLabel(
             text: "Sign Up",
             fontSize: 60,
             fontWeight: .heavy
         )
-        label.alpha = 0.0
-        label.transform = CGAffineTransform(translationX: 30, y: 0)
-        
-        UIView.animate(withDuration: 0.7, delay: 0.3, options: [.curveEaseInOut], animations: {
-            label.alpha = 1.0
-            label.transform = CGAffineTransform.identity
-        }, completion: nil)
-        
-        return label
     }()
     
     private let registrationNameTextField: UITextField = {
@@ -104,9 +95,7 @@ class LoginViewController: UIViewController {
         
         setUpViewModel()
         
-        loginEmailTextField.isHidden = true
-        loginPasswordTextField.isHidden = true
-        loginButton.isHidden = true
+        mainLabelAnimation()
         
         switchButton.addAction(UIAction(handler: { [weak self] _ in
             self?.switchButtonPressed()
@@ -122,11 +111,11 @@ class LoginViewController: UIViewController {
     }
     
     func setUpViewModel() {
-        viewModel.showAlertClosure = { [weak self] message in
+        viewModel.showAlert = { [weak self] message in
             if let message = message {
                 self?.showAlert(message: message)
             } else {
-                self?.navigationController?.pushViewController(HomeViewController(), animated: true)
+                self?.navigationController?.pushViewController(FriendsViewController(), animated: true)
             }
         }
     }
@@ -146,7 +135,11 @@ class LoginViewController: UIViewController {
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
         
-        registrationStackView.addArrangedSubview(registrationMainLabel)
+        loginEmailTextField.isHidden = true
+        loginPasswordTextField.isHidden = true
+        loginButton.isHidden = true
+        
+        registrationStackView.addArrangedSubview(mainLabel)
         registrationStackView.addArrangedSubview(registrationNameTextField)
         registrationStackView.addArrangedSubview(registrationEmailTextField)
         registrationStackView.addArrangedSubview(registrarionPasswordTextField)
@@ -193,7 +186,8 @@ class LoginViewController: UIViewController {
     private var signUpState = false {
         willSet {
             if newValue {
-                registrationMainLabel.text = "Sign In"
+                mainLabelAnimation()
+                mainLabel.text = "Sign In"
                 registrationNameTextField.isHidden = true
                 registrationEmailTextField.isHidden = true
                 registrarionPasswordTextField.isHidden = true
@@ -204,7 +198,8 @@ class LoginViewController: UIViewController {
                 makeHaveAccountLabel.text = "Do you want to register an account?"
                 switchButton.setTitle("Registration", for: .normal)
             } else {
-                registrationMainLabel.text = "Sign Up"
+                mainLabelAnimation()
+                mainLabel.text = "Sign Up"
                 registrationNameTextField.isHidden = false
                 registrationEmailTextField.isHidden = false
                 registrarionPasswordTextField.isHidden = false
@@ -216,6 +211,16 @@ class LoginViewController: UIViewController {
                 switchButton.setTitle("Log In", for: .normal)
             }
         }
+    }
+    
+    private func mainLabelAnimation() {
+        mainLabel.alpha = 0.0
+        mainLabel.transform = CGAffineTransform(translationX: 30, y: 0)
+        
+        UIView.animate(withDuration: 0.7, delay: 0.3, options: [.curveEaseInOut], animations: {
+            self.mainLabel.alpha = 1.0
+            self.mainLabel.transform = CGAffineTransform.identity
+        }, completion: nil)
     }
     
     private func switchButtonPressed() {
@@ -302,5 +307,21 @@ class LoginViewController: UIViewController {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @objc func handleTap() {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
     }
 }

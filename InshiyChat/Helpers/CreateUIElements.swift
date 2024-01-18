@@ -81,7 +81,11 @@ class CreateUIElements {
         button.titleLabel?.minimumScaleFactor = 0.5
         button.setTitle(title, for: .normal)
         button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
+        button.layer.masksToBounds = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.layer.shadowRadius = 4
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }

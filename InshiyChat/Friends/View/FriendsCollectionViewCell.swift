@@ -7,8 +7,8 @@
 
 import UIKit
 
-class HomeCollectionViewCell: UICollectionViewCell {
-    static let reuseIdentifier = "HomeCollectionViewCell"
+class FriendsCollectionViewCell: UICollectionViewCell {
+    static let reuseIdentifier = "FriendsCollectionViewCell"
     
     let userNameLabel: UILabel = {
         let label = CreateUIElements.makeSmallLabel(
@@ -20,17 +20,33 @@ class HomeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let userlastMessage: UILabel = {
-        let label = CreateUIElements.makeSmallLabel(
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            textColor: "000000",
-            fontSize: 14,
-            fontWeight: .light
-        )
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 2
-        return label
-    }()
+//    let userLastMessage: UILabel = {
+//        let label = CreateUIElements.makeSmallLabel(
+//            text: "There is no messages yet.",
+//            textColor: "000000",
+//            fontSize: 14,
+//            fontWeight: .light
+//        )
+//        label.lineBreakMode = .byWordWrapping
+//        label.numberOfLines = 2
+//        return label
+//    }()
+//    
+//    let numberOfUnreadMessages: UILabel = {
+//        let label = CreateUIElements.makeSmallLabel(
+//            text: "14",
+//            textColor: "ffffff",
+//            fontSize: 12,
+//            fontWeight: .light
+//        )
+//        label.backgroundColor = UIColor(hex: "412dc4")
+//        label.layer.masksToBounds = true
+//        label.layer.cornerRadius = 9
+//        label.textAlignment = .center
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.isHidden = true
+//        return label
+//    }()
     
     var userAvatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "profile_def"))
@@ -41,8 +57,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     lazy var stackViewUserLabels: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            userNameLabel,
-            userlastMessage
+            userNameLabel
+//            userLastMessage
         ])
         stackView.axis = .vertical
         stackView.spacing = 0
@@ -65,6 +81,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(stackViewUserInfo)
+//        contentView.addSubview(numberOfUnreadMessages)
         setUpConstraints()
     }
     
@@ -74,7 +91,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         contentView.backgroundColor = .white
+        
         let borderBottom = CALayer()
         borderBottom.backgroundColor = UIColor(hex: "F0F0F0").cgColor
         borderBottom.frame = CGRect(
@@ -83,16 +102,22 @@ class HomeCollectionViewCell: UICollectionViewCell {
             width: contentView.frame.width,
             height: 1
         )
+        
         contentView.layer.addSublayer(borderBottom)
     }
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            userNameLabel.heightAnchor.constraint(equalToConstant: 18),
+//            userNameLabel.heightAnchor.constraint(equalToConstant: 18),
             
             stackViewUserInfo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            stackViewUserInfo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 20),
+            stackViewUserInfo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             stackViewUserInfo.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
+//            numberOfUnreadMessages.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+//            numberOfUnreadMessages.widthAnchor.constraint(equalToConstant: 20),
+//            numberOfUnreadMessages.heightAnchor.constraint(equalToConstant: 20),
+//            numberOfUnreadMessages.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             userAvatarImageView.widthAnchor.constraint(equalToConstant: 75),
             userAvatarImageView.heightAnchor.constraint(equalToConstant: 75)

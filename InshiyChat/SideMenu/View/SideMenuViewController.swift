@@ -50,11 +50,8 @@ class SideMenuViewController: UIViewController {
     }()
     
     private let menu: [SideMenuModel] = [
-        SideMenuModel(icon: UIImage(systemName: "house.fill")!, title: "Home"),
-        SideMenuModel(icon: UIImage(systemName: "music.note")!, title: "Music"),
-        SideMenuModel(icon: UIImage(systemName: "film.fill")!, title: "Movies"),
-        SideMenuModel(icon: UIImage(systemName: "book.fill")!, title: "Books"),
-        SideMenuModel(icon: UIImage(systemName: "person.fill")!, title: "Profile"),
+        SideMenuModel(icon: UIImage(systemName: "person.3.fill")!, title: "Friends"),
+        SideMenuModel(icon: UIImage(systemName: "bubble.right.fill")!, title: "Chats"),
         SideMenuModel(icon: UIImage(systemName: "slider.horizontal.3")!, title: "Settings"),
         SideMenuModel(icon: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, title: "Log out")
     ]

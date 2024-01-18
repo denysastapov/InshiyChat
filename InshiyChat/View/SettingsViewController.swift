@@ -11,6 +11,13 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .red
+        
+        title = "Settings"
+        if let rootViewController = self.navigationController?.viewControllers.first as? ContainerViewController {
+            rootViewController.title = self.title
+        }
+        view.backgroundColor = .red
+
     }
+    
 }

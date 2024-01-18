@@ -8,9 +8,9 @@
 import UIKit
 import Firebase
 
-extension HomeViewController {
+extension ContainerViewController {
     
-    func getCurrentUser() {
+    func getCurrentUserForSideMenu() {
         
         guard let currentUser = Auth.auth().currentUser else {
             print("User is not autorized")

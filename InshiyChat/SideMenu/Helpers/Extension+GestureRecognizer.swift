@@ -7,7 +7,8 @@
 
 import UIKit
 
-extension HomeViewController: UIGestureRecognizerDelegate {
+extension ContainerViewController: UIGestureRecognizerDelegate {
+    
     @objc func tapGestureRecognizer(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             if self.isExpanded {

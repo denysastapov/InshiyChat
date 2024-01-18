@@ -1,17 +1,17 @@
 //
-//  HomeViewController.swift
+//  ContainerViewController.swift
 //  InshiyChat
 //
-//  Created by Denys Astapov on 08.12.2023.
+//  Created by Denys Astapov on 02.01.2024.
 //
 
 import UIKit
 import Firebase
+import KeychainSwift
 
-class HomeViewController: UIViewController {
+class ContainerViewController: UIViewController {
     
-    var viewModel = HomeViewModel()
-
+    var mainViewController: UIViewController!
     var sideMenuViewController: SideMenuViewController!
     var sideMenuShadowView: UIView!
     var sideMenuRevealWidth: CGFloat = 280
@@ -23,96 +23,25 @@ class HomeViewController: UIViewController {
     var openSideMenuOnTop: Bool = true
     var gestureEnabled: Bool = true
     
-    var dataSource: UICollectionViewDiffableDataSource<HomeSection, HomeSectionItem>?
-    var collectionView: UICollectionView! = nil
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         
-        getCurrentUser()
+        getCurrentUserForSideMenu()
         
-        configureCollectionView()
-        createDataSource()
-        fillCollectionView()
+        mainViewController = ChatListViewController()
+        addChild(mainViewController)
+        view.addSubview(mainViewController.view)
+        mainViewController.didMove(toParent: self)
         
-        setUp()
+        setUpSideMenu()
         
     }
     
-    private func configureCollectionView() {
-        collectionView = UICollectionView(
-            frame: view.bounds,
-            collectionViewLayout: createLayout()
-        )
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .white
-        view.addSubview(collectionView)
-        collectionView.register(
-            HomeCollectionViewCell.self,
-            forCellWithReuseIdentifier: HomeCollectionViewCell.reuseIdentifier
-        )
-    }
-    
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    func setUpSideMenu() {
+        navigationController?.isNavigationBarHidden = false
         
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(0.3)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize,
-            repeatingSubitem: item,
-            count: 1
-        )
+        self.title = "Chats"
         
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 0,
-            bottom: 0,
-            trailing: 0
-        )
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-    
-    private func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<HomeSection, HomeSectionItem>(
-            collectionView: collectionView,
-            cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: HomeCollectionViewCell.reuseIdentifier,
-                    for: indexPath) as? HomeCollectionViewCell else {
-                    return nil
-                }
-                cell.configure(with: HomeCollectionViewCell.CellDTO(
-                    friend: item.name,
-                    userAvatar: item.avatar
-                ))
-                return cell
-            })
-    }
-    
-    private func fillCollectionView() {
-        viewModel.fetchChatRooms { items in
-            var snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeSectionItem>()
-            let mainSection = HomeSection(items: items)
-            snapshot.appendSections([mainSection])
-            snapshot.appendItems(items, toSection: mainSection)
-            self.dataSource?.apply(snapshot, animatingDifferences: true)
-            self.collectionView.reloadData()
-        }
-    }
-    
-    func setUp() {
-        
-        self.title = "Home"
         let menuButton = UIBarButtonItem(
             image: UIImage(systemName: "line.horizontal.3"),
             primaryAction: UIAction(handler: { [weak self] _ in
@@ -120,8 +49,6 @@ class HomeViewController: UIViewController {
             }))
         menuButton.tintColor = .white
         navigationItem.leftBarButtonItem = menuButton
-        
-        navigationController?.isNavigationBarHidden = false
         
         self.setNavBarAppearance(tintColor: .white, barColor: UIColor(hex: "412dc4"))
         
@@ -151,6 +78,7 @@ class HomeViewController: UIViewController {
         self.sideMenuViewController.didMove(toParent: self)
         
         self.sideMenuViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
         if self.openSideMenuOnTop {
             self.sideMenuTrailingConstraint = self.sideMenuViewController.view.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,

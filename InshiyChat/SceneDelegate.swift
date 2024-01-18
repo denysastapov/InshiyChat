@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import KeychainSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -13,14 +15,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let loginViewModel = LoginViewModel()
-        let loginViewController = LoginViewController()
-        loginViewController.viewModel = loginViewModel
-        let rootViewController = UINavigationController(rootViewController: loginViewController)
-//        let rootViewController = UINavigationController(rootViewController: HomeViewController())
+
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = rootViewController
         self.window = window
+
+        if Auth.auth().currentUser != nil {
+            let homeViewController = ContainerViewController()
+            window.rootViewController = UINavigationController(rootViewController: homeViewController)
+        } else {
+            let loginViewModel = LoginViewModel()
+            let loginViewController = LoginViewController()
+            loginViewController.viewModel = loginViewModel
+            window.rootViewController = UINavigationController(rootViewController: loginViewController)
+        }
         window.makeKeyAndVisible()
     }
 }
