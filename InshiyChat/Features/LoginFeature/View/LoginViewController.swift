@@ -115,13 +115,18 @@ class LoginViewController: UIViewController {
             if let message = message {
                 self?.showAlert(message: message)
             } else {
-                self?.navigationController?.pushViewController(FriendsViewController(), animated: true)
+                let databaseManager = DatabaseManager()
+                let friendsModel = FriendsModel(databaseManager: databaseManager)
+                let friendsViewModel = FriendsViewModel(friendsModel: friendsModel)
+                self?.navigationController?.pushViewController(
+                    FriendsViewController(viewModel: friendsViewModel),
+                    animated: true
+                )
             }
         }
     }
     
     private func setUp() {
-        
         viewModel.navigationController = navigationController
         
         registrationNameTextField.delegate = self

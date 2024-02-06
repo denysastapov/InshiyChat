@@ -6,14 +6,39 @@
 //
 
 import UIKit
-import Firebase
 
 class FriendsViewController: UIViewController {
     
-    var viewModel = FriendsViewModel()
+    private let viewModel: FriendsViewModel!
+    private let collectionView: UICollectionView!
+    private let dataSource: UICollectionViewDiffableDataSource<FriendsSection, FriendsSectionItem>!
     
-    var dataSource: UICollectionViewDiffableDataSource<FriendsSection, FriendsSectionItem>?
-    var collectionView: UICollectionView!
+    init(viewModel: FriendsViewModel) {
+        self.collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: FriendsViewController.createLayout()
+        )
+        self.viewModel = viewModel
+        self.dataSource = UICollectionViewDiffableDataSource<FriendsSection, FriendsSectionItem>(
+            collectionView: collectionView,
+            cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: FriendsCollectionViewCell.reuseIdentifier,
+                    for: indexPath) as? FriendsCollectionViewCell else {
+                    return nil
+                }
+                cell.configure(with: FriendsCollectionViewCell.CellDTO(
+                    friend: item.name,
+                    userAvatar: item.avatar
+                ))
+                return cell
+            })
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Please use designated init instead of calling ViewVC storyboard")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +50,13 @@ class FriendsViewController: UIViewController {
         }
         
         configureCollectionView()
-        createDataSource()
         fillCollectionView()
-
+        
         collectionView.delegate = self
         
     }
     
     private func configureCollectionView() {
-        collectionView = UICollectionView(
-            frame: view.bounds,
-            collectionViewLayout: createLayout()
-        )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .white
         view.addSubview(collectionView)
@@ -44,9 +64,16 @@ class FriendsViewController: UIViewController {
             FriendsCollectionViewCell.self,
             forCellWithReuseIdentifier: FriendsCollectionViewCell.reuseIdentifier
         )
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
-    private func createLayout() -> UICollectionViewLayout {
+    private static func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1.0)
@@ -74,31 +101,19 @@ class FriendsViewController: UIViewController {
         return layout
     }
     
-    private func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<FriendsSection, FriendsSectionItem>(
-            collectionView: collectionView,
-            cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: FriendsCollectionViewCell.reuseIdentifier,
-                    for: indexPath) as? FriendsCollectionViewCell else {
-                    return nil
-                }
-                cell.configure(with: FriendsCollectionViewCell.CellDTO(
-                    friend: item.name,
-                    userAvatar: item.avatar
-                ))
-                return cell
-            })
-    }
-
     private func fillCollectionView() {
-        viewModel.fetchFriends { items in
+        viewModel.fetchFriends { [weak self] items in
+            guard let self = self else { return }
             var snapshot = NSDiffableDataSourceSnapshot<FriendsSection, FriendsSectionItem>()
             let mainSection = FriendsSection(items: items)
             snapshot.appendSections([mainSection])
             snapshot.appendItems(items, toSection: mainSection)
-            self.dataSource?.apply(snapshot, animatingDifferences: true)
-            self.collectionView.reloadData()
+            
+            if let dataSource = self.dataSource {
+                dataSource.apply(snapshot, animatingDifferences: true)
+            } else {
+                print("dataSource is nil")
+            }
         }
     }
 }
@@ -107,7 +122,8 @@ extension FriendsViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let itemID = dataSource?.itemIdentifier(for: indexPath) {
-            let chatRoomViewController = ChatRoomViewController()
+            let chatRoomViewModel = ChatRoomViewModel()
+            let chatRoomViewController = ChatRoomViewController(viewModel: chatRoomViewModel)
             chatRoomViewController.userName = itemID.name
             chatRoomViewController.userAvatarURL = itemID.avatar
             chatRoomViewController.userUID = itemID.uid

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D50371D02B5963FF00B1893C /* DateSeparatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50371CF2B5963FF00B1893C /* DateSeparatorCollectionViewCell.swift */; };
 		D50B80A72B318F4700E3B6CB /* RecipientCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50B80A62B318F4700E3B6CB /* RecipientCollectionViewCell.swift */; };
 		D50B80AA2B31A2F600E3B6CB /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50B80A92B31A2F600E3B6CB /* ChatRoomViewModel.swift */; };
 		D5122FD72B1F1B2900D4AC7F /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5122FD62B1F1B2900D4AC7F /* UIColor+Extension.swift */; };
@@ -40,12 +41,18 @@
 		D5402B952B40CEC200A1C0EC /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5402B942B40CEC200A1C0EC /* ChatListViewModel.swift */; };
 		D5402B972B40CEEC00A1C0EC /* ChatListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5402B962B40CEEC00A1C0EC /* ChatListModel.swift */; };
 		D54E84B12B28B94F00562726 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E84B02B28B94F00562726 /* FriendsViewModel.swift */; };
-		D556AF312B278F6200B475A6 /* Extension+GetCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D556AF302B278F6200B475A6 /* Extension+GetCurrentUser.swift */; };
+		D556AF312B278F6200B475A6 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D556AF302B278F6200B475A6 /* SideMenuViewModel.swift */; };
 		D556AF332B27A55E00B475A6 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D556AF322B27A55E00B475A6 /* FriendsCollectionViewCell.swift */; };
 		D55F91682B1F8C8200A20EA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D55F91672B1F8C8200A20EA3 /* GoogleService-Info.plist */; };
 		D55F916A2B1FA4FE00A20EA3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D55F91692B1FA4FE00A20EA3 /* Launch Screen.storyboard */; };
 		D5ABF9682B442A080008C898 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABF9672B442A080008C898 /* ContainerViewController.swift */; };
 		D5ABF96E2B44A8740008C898 /* ChatListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABF96D2B44A8740008C898 /* ChatListCollectionViewCell.swift */; };
+		D5B09EF42B5AD88800DFB63B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B09EF32B5AD88800DFB63B /* DatabaseManager.swift */; };
+		D5B243B72B6BEB6D0030B94C /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B243B62B6BEB6D0030B94C /* SideMenuModel.swift */; };
+		D5B243BA2B6CED940030B94C /* BootstrapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B243B92B6CED940030B94C /* BootstrapService.swift */; };
+		D5B243BE2B6CEEDB0030B94C /* LoginFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B243BD2B6CEEDB0030B94C /* LoginFeature.swift */; };
+		D5B243C02B6CEEFA0030B94C /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B243BF2B6CEEFA0030B94C /* Feature.swift */; };
+		D5B243C22B6D0D0F0030B94C /* ScreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B243C12B6D0D0F0030B94C /* ScreenProvider.swift */; };
 		D5BA86D52B3073140097C917 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BA86D42B3073140097C917 /* FriendsModel.swift */; };
 		D5BA86DB2B30758B0097C917 /* SenderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BA86DA2B30758B0097C917 /* SenderCollectionViewCell.swift */; };
 		D5C34E2F2B1F4527003C2DED /* CreateUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C34E2E2B1F4527003C2DED /* CreateUIElements.swift */; };
@@ -94,6 +101,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D503705E2B6ACEEF00127880 /* InshiyChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InshiyChat.entitlements; sourceTree = "<group>"; };
+		D50371CF2B5963FF00B1893C /* DateSeparatorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSeparatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		D50B80A62B318F4700E3B6CB /* RecipientCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientCollectionViewCell.swift; sourceTree = "<group>"; };
 		D50B80A92B31A2F600E3B6CB /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		D5122FD62B1F1B2900D4AC7F /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -101,12 +110,18 @@
 		D5402B942B40CEC200A1C0EC /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		D5402B962B40CEEC00A1C0EC /* ChatListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListModel.swift; sourceTree = "<group>"; };
 		D54E84B02B28B94F00562726 /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
-		D556AF302B278F6200B475A6 /* Extension+GetCurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+GetCurrentUser.swift"; sourceTree = "<group>"; };
+		D556AF302B278F6200B475A6 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		D556AF322B27A55E00B475A6 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		D55F91672B1F8C8200A20EA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D55F91692B1FA4FE00A20EA3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "InshiyChat/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
 		D5ABF9672B442A080008C898 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		D5ABF96D2B44A8740008C898 /* ChatListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCollectionViewCell.swift; sourceTree = "<group>"; };
+		D5B09EF32B5AD88800DFB63B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		D5B243B62B6BEB6D0030B94C /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
+		D5B243B92B6CED940030B94C /* BootstrapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootstrapService.swift; sourceTree = "<group>"; };
+		D5B243BD2B6CEEDB0030B94C /* LoginFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeature.swift; sourceTree = "<group>"; };
+		D5B243BF2B6CEEFA0030B94C /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		D5B243C12B6D0D0F0030B94C /* ScreenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenProvider.swift; sourceTree = "<group>"; };
 		D5BA86D42B3073140097C917 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		D5BA86DA2B30758B0097C917 /* SenderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5C34E2E2B1F4527003C2DED /* CreateUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUIElements.swift; sourceTree = "<group>"; };
@@ -201,15 +216,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		D55F916B2B220A8200A20EA3 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				D5C34E342B1F6D0B003C2DED /* View */,
-				D5C34E362B1F6D45003C2DED /* ViewModel */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		D5ABF9692B44A6CA0008C898 /* ChatList */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +251,51 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D5B243B42B6BE7F80030B94C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D556AF302B278F6200B475A6 /* SideMenuViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D5B243B52B6BEB450030B94C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D5B243B62B6BEB6D0030B94C /* SideMenuModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D5B243B82B6CED770030B94C /* CoreServices */ = {
+			isa = PBXGroup;
+			children = (
+				D5B09EF32B5AD88800DFB63B /* DatabaseManager.swift */,
+				D5B243B92B6CED940030B94C /* BootstrapService.swift */,
+				D5B243C12B6D0D0F0030B94C /* ScreenProvider.swift */,
+			);
+			path = CoreServices;
+			sourceTree = "<group>";
+		};
+		D5B243BB2B6CEEA50030B94C /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D5B243BC2B6CEEB70030B94C /* LoginFeature */,
+				D5B243BF2B6CEEFA0030B94C /* Feature.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D5B243BC2B6CEEB70030B94C /* LoginFeature */ = {
+			isa = PBXGroup;
+			children = (
+				D5B243BD2B6CEEDB0030B94C /* LoginFeature.swift */,
+				D5C34E362B1F6D45003C2DED /* ViewModel */,
+				D5C34E342B1F6D0B003C2DED /* View */,
+			);
+			path = LoginFeature;
+			sourceTree = "<group>";
+		};
 		D5BA86D62B3073380097C917 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +318,7 @@
 				D5D81C7E2B2B1533002C5E95 /* ChatRoomViewController.swift */,
 				D5BA86DA2B30758B0097C917 /* SenderCollectionViewCell.swift */,
 				D50B80A62B318F4700E3B6CB /* RecipientCollectionViewCell.swift */,
+				D50371CF2B5963FF00B1893C /* DateSeparatorCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -321,7 +373,9 @@
 		D5CC41F22B24E5DB00534D23 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D5B243B52B6BEB450030B94C /* Model */,
 				D5CC41F32B24E5E900534D23 /* View */,
+				D5B243B42B6BE7F80030B94C /* ViewModel */,
 				D5CC41F52B24E5FA00534D23 /* Helpers */,
 			);
 			path = SideMenu;
@@ -340,7 +394,6 @@
 			isa = PBXGroup;
 			children = (
 				D5CC41ED2B24DC6E00534D23 /* Extension+SideMenuItems.swift */,
-				D556AF302B278F6200B475A6 /* Extension+GetCurrentUser.swift */,
 				D5CC41EA2B24DB0C00534D23 /* Extension+GestureRecognizer.swift */,
 			);
 			path = Helpers;
@@ -392,14 +445,16 @@
 		D5DA607A2B1E077A007CB832 /* InshiyChat */ = {
 			isa = PBXGroup;
 			children = (
+				D503705E2B6ACEEF00127880 /* InshiyChat.entitlements */,
 				D5DA607B2B1E077A007CB832 /* AppDelegate.swift */,
 				D5DA607D2B1E077A007CB832 /* SceneDelegate.swift */,
+				D5B243BB2B6CEEA50030B94C /* Features */,
+				D5B243B82B6CED770030B94C /* CoreServices */,
 				D5BA86D92B3074A30097C917 /* ChatRoom */,
 				D5ABF9692B44A6CA0008C898 /* ChatList */,
 				D5CC41F12B24E5BD00534D23 /* View */,
 				D5CC41F22B24E5DB00534D23 /* SideMenu */,
 				D5D81C792B2A2E70002C5E95 /* Friends */,
-				D55F916B2B220A8200A20EA3 /* Login */,
 				D5C34E352B1F6D25003C2DED /* Helpers */,
 				D5DA60842B1E077B007CB832 /* Assets.xcassets */,
 				D55F91692B1FA4FE00A20EA3 /* Launch Screen.storyboard */,
@@ -547,9 +602,10 @@
 				D5D81C7F2B2B1533002C5E95 /* ChatRoomViewController.swift in Sources */,
 				D5C688442B3874EC00716066 /* UIResponder+Utils.swift in Sources */,
 				D5CC41E32B237B1C00534D23 /* SideMenuViewController.swift in Sources */,
-				D556AF312B278F6200B475A6 /* Extension+GetCurrentUser.swift in Sources */,
+				D556AF312B278F6200B475A6 /* SideMenuViewModel.swift in Sources */,
 				D5402B932B40CE5400A1C0EC /* ChatListViewController.swift in Sources */,
 				D5C34E332B1F6BFE003C2DED /* KeyboardHelper.swift in Sources */,
+				D50371D02B5963FF00B1893C /* DateSeparatorCollectionViewCell.swift in Sources */,
 				D5BA86D52B3073140097C917 /* FriendsModel.swift in Sources */,
 				D5CC41E52B237B6B00534D23 /* FriendsViewController.swift in Sources */,
 				D5CC41EB2B24DB0C00534D23 /* Extension+GestureRecognizer.swift in Sources */,
@@ -559,13 +615,19 @@
 				D5402B952B40CEC200A1C0EC /* ChatListViewModel.swift in Sources */,
 				D50B80AA2B31A2F600E3B6CB /* ChatRoomViewModel.swift in Sources */,
 				D5CC41F02B24DDB100534D23 /* SettingsViewController.swift in Sources */,
+				D5B243C02B6CEEFA0030B94C /* Feature.swift in Sources */,
 				D54E84B12B28B94F00562726 /* FriendsViewModel.swift in Sources */,
+				D5B243BA2B6CED940030B94C /* BootstrapService.swift in Sources */,
 				D556AF332B27A55E00B475A6 /* FriendsCollectionViewCell.swift in Sources */,
 				D5402B972B40CEEC00A1C0EC /* ChatListModel.swift in Sources */,
+				D5B243B72B6BEB6D0030B94C /* SideMenuModel.swift in Sources */,
 				D5C34E312B1F6AD3003C2DED /* ValidationFieldsHelper.swift in Sources */,
 				D5BA86DB2B30758B0097C917 /* SenderCollectionViewCell.swift in Sources */,
+				D5B09EF42B5AD88800DFB63B /* DatabaseManager.swift in Sources */,
+				D5B243BE2B6CEEDB0030B94C /* LoginFeature.swift in Sources */,
 				D5DA607E2B1E077A007CB832 /* SceneDelegate.swift in Sources */,
 				D5C34E382B1F6DE4003C2DED /* LoginViewModel.swift in Sources */,
+				D5B243C22B6D0D0F0030B94C /* ScreenProvider.swift in Sources */,
 				D5122FD72B1F1B2900D4AC7F /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -697,6 +759,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = InshiyChat/InshiyChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 37CALG48FF;
@@ -727,6 +790,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = InshiyChat/InshiyChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 37CALG48FF;

@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import KeychainSwift
 
 extension ContainerViewController: SideMenuViewControllerDelegate {
     
@@ -16,9 +15,15 @@ extension ContainerViewController: SideMenuViewControllerDelegate {
         let newViewController: UIViewController
         switch row {
         case 0:
-            newViewController = FriendsViewController()
+            let databaseManager = DatabaseManager()
+            let friendsModel = FriendsModel(databaseManager: databaseManager)
+            let friendsViewModel = FriendsViewModel(friendsModel: friendsModel)
+            newViewController = FriendsViewController(viewModel: friendsViewModel)
         case 1:
-            newViewController = ChatListViewController()
+            let databaseManager = DatabaseManager()
+            let chatListModel = ChatListModel(databaseManager: databaseManager)
+            let chatListViewModel = ChatListViewModel(chatListModel: chatListModel)
+            newViewController = ChatListViewController(viewModel: chatListViewModel)
         case 2:
             newViewController = SettingsViewController()
         case 3:
@@ -27,8 +32,6 @@ extension ContainerViewController: SideMenuViewControllerDelegate {
             } catch {
                 print(error)
             }
-            let keychain = KeychainSwift()
-            keychain.delete("firebaseAuthToken")
             navigationController?.popToRootViewController(animated: true)
             navigationController?.isNavigationBarHidden = true
             return
@@ -37,7 +40,6 @@ extension ContainerViewController: SideMenuViewControllerDelegate {
         }
         showViewController(newViewController)
         DispatchQueue.main.async { self.sideMenuState(expanded: false) }
-        
     }
     
     func showViewController(_ viewController: UIViewController) {
@@ -51,7 +53,6 @@ extension ContainerViewController: SideMenuViewControllerDelegate {
         addChild(viewController)
         view.insertSubview(viewController.view, at: 0)
         viewController.didMove(toParent: self)
-        
         viewController.view.frame = view.bounds
     }
 }

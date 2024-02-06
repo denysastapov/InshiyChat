@@ -7,6 +7,23 @@
 
 import Foundation
 
+struct FriendsModel {
+    
+    private let databaseManager: DatabaseManager
+    
+    init(databaseManager: DatabaseManager) {
+        self.databaseManager = databaseManager
+    }
+    
+    func getCurrentUserUID() -> String? {
+        databaseManager.getCurrentUserUID()
+    }
+    
+    func fetchFriends(completion: @escaping ([FriendsSectionItem]) -> Void) {
+        databaseManager.fetchFriends(completion: completion)
+    }
+}
+
 struct FriendsSection: Hashable {
     let id = UUID()
     let items: [FriendsSectionItem]

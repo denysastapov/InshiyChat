@@ -9,8 +9,6 @@ import UIKit
 
 class ChatRoomViewController: UIViewController {
     
-    var viewModel = ChatRoomViewModel()
-    
     var currentUserID: String?
     var userUID: String?
     var userName: String?
@@ -18,44 +16,16 @@ class ChatRoomViewController: UIViewController {
     var chatUID: String?
     var messageBoxBottomConstraint: NSLayoutConstraint?
     
-    var dataSource: UICollectionViewDiffableDataSource<ChatRoomDTO, MessageDTO>?
-    var collectionView: UICollectionView!
+    private let viewModel: ChatRoomViewModel!
+    private let collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<ChatRoomDTO, MessageDTO>!
     
-    let inputMessageField: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.font = UIFont.systemFont(ofSize: 18)
-        
-        textView.backgroundColor = UIColor(hex: "F6F6F6")
-        textView.layer.cornerRadius = 8
-        textView.layer.borderColor = UIColor(hex: "F6F6F6").cgColor
-        textView.layer.borderWidth = 1.0
-        textView.layer.masksToBounds = true
-        textView.keyboardType = .default
-
-        textView.textColor = UIColor(hex: "A4A4A4")
-        textView.layer.shadowColor = UIColor.gray.cgColor
-        textView.layer.shadowOpacity = 0.3
-        textView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        textView.layer.shadowRadius = 4
-
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    private let inputMessageField: UITextView = {
+        CreateUIElements.createInputMessageField()
     }()
     
-    let sendButton: UIButton = {
-        let button = UIButton()
-        
-        var buttonConfig = UIButton.Configuration.plain()
-        buttonConfig.image = UIImage(systemName: "paperplane.fill")
-        buttonConfig.imagePlacement = .all
-        buttonConfig.imagePadding = 0
-        buttonConfig.baseForegroundColor = UIColor(hex: "412dc4")
-        
-        button.configuration = buttonConfig
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
+    private let sendButton: UIButton = {
+        CreateUIElements.createSendButton()
     }()
     
     lazy var messageBoxStackView: UIStackView = {
@@ -69,6 +39,41 @@ class ChatRoomViewController: UIViewController {
         return stackView
     }()
     
+    init(viewModel: ChatRoomViewModel) {
+        self.currentUserID = ""
+        self.viewModel = viewModel
+        self.collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: ChatRoomViewController.createLayout()
+        )
+        super.init(nibName: nil, bundle: nil)
+        self.dataSource = UICollectionViewDiffableDataSource<ChatRoomDTO, MessageDTO>(
+            collectionView: collectionView,
+            cellProvider: { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
+                guard let self = self else { return nil }
+                if item.messageOwnerID == self.currentUserID {
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: SenderCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    ) as? SenderCollectionViewCell
+                    cell?.configure(with: item)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: RecipientCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    ) as? RecipientCollectionViewCell
+                    cell?.configure(with: item)
+                    return cell
+                }
+            }
+        )
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,7 +82,6 @@ class ChatRoomViewController: UIViewController {
         
         setupKeyboardHandling()
         configureCollectionView()
-        createDataSource()
         fillCollectionView()
         
         setUpUI()
@@ -130,15 +134,12 @@ class ChatRoomViewController: UIViewController {
     }
     
     private func prepareForLoadingChats() {
-
         viewModel.getCurrentUserUID { [weak self] currentUserUID in
             self?.currentUserID = currentUserUID
         }
-        
         guard let userUID = self.userUID, let currentUserID = self.currentUserID else {
             return
         }
-        
         viewModel.isChatExsists(
             userUID1: userUID,
             userUID2: currentUserID,
@@ -155,10 +156,10 @@ class ChatRoomViewController: UIViewController {
     private func handleNewMessage(_ message: MessageDTO) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-
+            
             if var snapshot = self.dataSource?.snapshot() {
                 snapshot.appendItems([message], toSection: snapshot.sectionIdentifiers.first)
-
+                
                 self.dataSource?.apply(snapshot, animatingDifferences: true)
                 self.scrollToLastItem()
             }
@@ -214,15 +215,12 @@ class ChatRoomViewController: UIViewController {
                 let chatRoom = ChatRoomDTO(messages: messages, usersIDs: [self?.userUID, self?.currentUserID].compactMap { $0 })
                 snapshot.appendSections([chatRoom])
                 snapshot.appendItems(messages, toSection: chatRoom)
+                self?.dataSource?.apply(snapshot, animatingDifferences: true)
             }
         }
     }
     
     private func configureCollectionView() {
-        collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: createLayout()
-        )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(collectionView)
         collectionView.backgroundColor = .clear
@@ -240,7 +238,7 @@ class ChatRoomViewController: UIViewController {
         )
     }
     
-    private func createLayout() -> UICollectionViewLayout {
+    private static func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(100)
@@ -262,8 +260,8 @@ class ChatRoomViewController: UIViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    private func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<ChatRoomDTO, MessageDTO>(
+    private func createDataSource() -> UICollectionViewDiffableDataSource<ChatRoomDTO, MessageDTO> {
+        return UICollectionViewDiffableDataSource<ChatRoomDTO, MessageDTO>(
             collectionView: collectionView,
             cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
                 if item.messageOwnerID == self.currentUserID {

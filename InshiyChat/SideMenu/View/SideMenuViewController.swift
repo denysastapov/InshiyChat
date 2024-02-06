@@ -12,31 +12,27 @@ protocol SideMenuViewControllerDelegate: AnyObject {
     func selectedCell(_ row: Int)
 }
 
-struct SideMenuModel {
-    var icon: UIImage
-    var title: String
-}
-
 class SideMenuViewController: UIViewController {
     
-    var delegate: SideMenuViewControllerDelegate?
+    var delegate: SideMenuViewControllerDelegate!
+    private let viewModel: SideMenuViewModel!
     
     var userFirstNameLabel = CreateUIElements.makeSmallLabel(
-        text: "Tony",
+        text: "",
         textColor: "ffffff",
         fontSize: 22,
         fontWeight: .bold
     )
     
     var userNameLabel = CreateUIElements.makeSmallLabel(
-        text: "@username",
+        text: "",
         textColor: "ffffff",
         fontSize: 14,
         fontWeight: .regular
     )
     
     var userPhoneNumberLabel = CreateUIElements.makeSmallLabel(
-        text: "+62812345678",
+        text: "",
         textColor: "ffffff",
         fontSize: 14,
         fontWeight: .regular
@@ -49,11 +45,11 @@ class SideMenuViewController: UIViewController {
         return imageView
     }()
     
-    private let menu: [SideMenuModel] = [
-        SideMenuModel(icon: UIImage(systemName: "person.3.fill")!, title: "Friends"),
-        SideMenuModel(icon: UIImage(systemName: "bubble.right.fill")!, title: "Chats"),
-        SideMenuModel(icon: UIImage(systemName: "slider.horizontal.3")!, title: "Settings"),
-        SideMenuModel(icon: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, title: "Log out")
+    private let menu: [SideMenuItem] = [
+        SideMenuItem(icon: UIImage(systemName: "person.3.fill")!, title: "Friends"),
+        SideMenuItem(icon: UIImage(systemName: "bubble.right.fill")!, title: "Chats"),
+        SideMenuItem(icon: UIImage(systemName: "slider.horizontal.3")!, title: "Settings"),
+        SideMenuItem(icon: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, title: "Log out")
     ]
     
     private let sideMenuCollectionView: UICollectionView = {
@@ -69,17 +65,41 @@ class SideMenuViewController: UIViewController {
         return collectionView
     }()
     
+    init(viewModel: SideMenuViewModel, delegate: SideMenuViewControllerDelegate) {
+        self.delegate = delegate
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getCurrentUserForSideMenu()
         sideMenuCollectionView.delegate = self
         sideMenuCollectionView.dataSource = self
-
         setUp()
-        
+    }
+    
+    func getCurrentUserForSideMenu() {
+        viewModel.fetchCurrentUser { [weak self] userInfo in
+            guard let strongSelf = self else { return }
+            if let userInfo = userInfo {
+                DispatchQueue.main.async {
+                    strongSelf.userFirstNameLabel.text = userInfo.name
+                    strongSelf.userNameLabel.text = userInfo.userName
+                    strongSelf.userAvatarImageView.image = userInfo.avatarImage ?? UIImage(named: "profile_def")
+                    strongSelf.userPhoneNumberLabel.text = userInfo.phone
+                }
+            } else {
+                print("Error: User info was not fetched")
+            }
+        }
     }
     
     private func setUp() {
-        
         self.view.backgroundColor = UIColor(hex: "412dc4")
         
         let stackViewUserLabels = UIStackView(arrangedSubviews: [
@@ -103,7 +123,6 @@ class SideMenuViewController: UIViewController {
         stackViewUserInfo.axis = .horizontal
         stackViewUserInfo.spacing = 15
         stackViewUserInfo.alignment = .center
-        stackViewUserInfo.distribution = .fillProportionally
         stackViewUserInfo.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

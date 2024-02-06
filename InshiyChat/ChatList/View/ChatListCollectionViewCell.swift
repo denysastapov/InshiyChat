@@ -132,7 +132,13 @@ class ChatListCollectionViewCell: UICollectionViewCell {
         }
 
         userLastMessage.text = user.lastMessage
-        numberOfUnreadMessages.text = user.numberOfUnread
+
+        if !user.numberOfUnread.isEmpty, let intValue = Int(user.numberOfUnread), intValue > 0 {
+            numberOfUnreadMessages.isHidden = false
+            numberOfUnreadMessages.text = user.numberOfUnread
+        } else {
+            numberOfUnreadMessages.isHidden = true
+        }
 
         let newAvatarUrlHash = user.userAvatar.hashValue
         if currentAvatarUrlHash != newAvatarUrlHash {

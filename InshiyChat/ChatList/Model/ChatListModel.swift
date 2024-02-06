@@ -7,6 +7,34 @@
 
 import Foundation
 
+struct ChatListModel {
+    
+    private let databaseManager: DatabaseManager
+    
+    init(databaseManager: DatabaseManager) {
+        self.databaseManager = databaseManager
+    }
+    
+    func loadInitialChatRooms(completion: @escaping ([ChatSectionItem]) -> Void) {
+        databaseManager.loadInitialChatRooms(completion: completion)
+    }
+    
+    func observeChatsLastMessages(completion: @escaping (String, String) -> Void) {
+        databaseManager.observeChatsLastMessages(completion: completion)
+    }
+    
+    func observeLastMessage(for chatRoomUID: String, completion: @escaping (String, String) -> Void) {
+        databaseManager.observeLastMessage(for: chatRoomUID) { chatRoomUID, lastMessageText in
+            completion(chatRoomUID, lastMessageText)
+        }
+    }
+    
+    func updateChatRoom(with newMessage: String, for chatRoomUID: String) {
+        databaseManager.updateChatRoom(with: newMessage, for: chatRoomUID)
+    }
+
+}
+
 struct ChatSection: Hashable {
     let id = UUID()
     var items: [ChatSectionItem]

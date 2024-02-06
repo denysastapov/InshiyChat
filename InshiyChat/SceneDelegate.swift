@@ -20,7 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
 
         if Auth.auth().currentUser != nil {
-            let homeViewController = ContainerViewController()
+            let databaseManager = DatabaseManager()
+            let sideMenuModel = SideMenuModel(databaseManager: databaseManager)
+            let sideMenuViewModel = SideMenuViewModel(sideMenuModel: sideMenuModel)
+            let homeViewController = ContainerViewController(viewModel: sideMenuViewModel)
             window.rootViewController = UINavigationController(rootViewController: homeViewController)
         } else {
             let loginViewModel = LoginViewModel()

@@ -20,34 +20,6 @@ class FriendsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-//    let userLastMessage: UILabel = {
-//        let label = CreateUIElements.makeSmallLabel(
-//            text: "There is no messages yet.",
-//            textColor: "000000",
-//            fontSize: 14,
-//            fontWeight: .light
-//        )
-//        label.lineBreakMode = .byWordWrapping
-//        label.numberOfLines = 2
-//        return label
-//    }()
-//    
-//    let numberOfUnreadMessages: UILabel = {
-//        let label = CreateUIElements.makeSmallLabel(
-//            text: "14",
-//            textColor: "ffffff",
-//            fontSize: 12,
-//            fontWeight: .light
-//        )
-//        label.backgroundColor = UIColor(hex: "412dc4")
-//        label.layer.masksToBounds = true
-//        label.layer.cornerRadius = 9
-//        label.textAlignment = .center
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.isHidden = true
-//        return label
-//    }()
-    
     var userAvatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "profile_def"))
         imageView.contentMode = .scaleAspectFit
@@ -81,7 +53,6 @@ class FriendsCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(stackViewUserInfo)
-//        contentView.addSubview(numberOfUnreadMessages)
         setUpConstraints()
     }
     
@@ -108,16 +79,10 @@ class FriendsCollectionViewCell: UICollectionViewCell {
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-//            userNameLabel.heightAnchor.constraint(equalToConstant: 18),
             
             stackViewUserInfo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             stackViewUserInfo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             stackViewUserInfo.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
-//            numberOfUnreadMessages.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-//            numberOfUnreadMessages.widthAnchor.constraint(equalToConstant: 20),
-//            numberOfUnreadMessages.heightAnchor.constraint(equalToConstant: 20),
-//            numberOfUnreadMessages.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             userAvatarImageView.widthAnchor.constraint(equalToConstant: 75),
             userAvatarImageView.heightAnchor.constraint(equalToConstant: 75)

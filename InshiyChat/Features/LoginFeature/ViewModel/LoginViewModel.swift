@@ -58,7 +58,13 @@ class LoginViewModel {
                         self.showAlert?("Error getting authentication token: \(error.localizedDescription)")
                     } else if let idToken = idToken {
                         self.handleToken(token: idToken)
-                        self.navigationController?.pushViewController(ContainerViewController(), animated: true)
+                        let databaseManager = DatabaseManager()
+                        let sideMenuModel = SideMenuModel(databaseManager: databaseManager)
+                        let sideMenuViewModel = SideMenuViewModel(sideMenuModel: sideMenuModel)
+                        self.navigationController?.pushViewController(
+                            ContainerViewController(viewModel: sideMenuViewModel), 
+                            animated: true
+                        )
                     }
                 }
             }

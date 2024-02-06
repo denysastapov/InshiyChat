@@ -11,6 +11,7 @@ import KeychainSwift
 
 class ContainerViewController: UIViewController {
     
+    var viewModel: SideMenuViewModel!
     var mainViewController: UIViewController!
     var sideMenuViewController: SideMenuViewController!
     var sideMenuShadowView: UIView!
@@ -23,12 +24,21 @@ class ContainerViewController: UIViewController {
     var openSideMenuOnTop: Bool = true
     var gestureEnabled: Bool = true
     
+    init(viewModel: SideMenuViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getCurrentUserForSideMenu()
-        
-        mainViewController = ChatListViewController()
+        let databaseManager = DatabaseManager()
+        let chatListModel = ChatListModel(databaseManager: databaseManager)
+        let chatListViewModel = ChatListViewModel(chatListModel: chatListModel)
+        mainViewController = ChatListViewController(viewModel: chatListViewModel)
         addChild(mainViewController)
         view.addSubview(mainViewController.view)
         mainViewController.didMove(toParent: self)
@@ -70,7 +80,7 @@ class ContainerViewController: UIViewController {
             view.insertSubview(self.sideMenuShadowView, at: 1)
         }
         
-        self.sideMenuViewController = SideMenuViewController()
+        self.sideMenuViewController = SideMenuViewController(viewModel: viewModel, delegate: self)
         self.sideMenuViewController.delegate = self
         
         view.insertSubview(self.sideMenuViewController.view, at: self.openSideMenuOnTop ? 2 : 0)

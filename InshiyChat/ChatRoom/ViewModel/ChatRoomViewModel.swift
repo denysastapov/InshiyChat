@@ -10,6 +10,8 @@ import Firebase
 
 class ChatRoomViewModel {
     
+    let dataBaseManager = DatabaseManager()
+    
     func getCurrentUserUID(completion: @escaping (String) -> Void) {
         guard let currentUser = Auth.auth().currentUser else {
             print("No user is currently signed in.")
@@ -131,7 +133,6 @@ class ChatRoomViewModel {
             print("Cant convert isRead")
             return nil
         }
-
         let message = MessageDTO(
             text: text,
             timeStamp: timeStamp,

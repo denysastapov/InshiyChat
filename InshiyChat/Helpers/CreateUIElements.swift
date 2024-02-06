@@ -9,8 +9,10 @@ import UIKit
 
 class CreateUIElements {
     
-    static func makeTextField(placeholder: String,
-                              isSecureTextEntry: Bool = false) -> UITextField {
+    static func makeTextField(
+        placeholder: String,
+        isSecureTextEntry: Bool = false
+    ) -> UITextField {
         let textField = UITextField()
         textField.placeholder = placeholder
         textField.borderStyle = .roundedRect
@@ -35,7 +37,11 @@ class CreateUIElements {
         return textField
     }
     
-    static func makeBigLabel(text: String, fontSize: CGFloat, fontWeight: UIFont.Weight) -> UILabel {
+    static func makeBigLabel(
+        text: String,
+        fontSize: CGFloat,
+        fontWeight: UIFont.Weight
+    ) -> UILabel {
         let label = UILabel()
         label.text = text
         label.textColor = UIColor(hex: "412dc4")
@@ -66,7 +72,11 @@ class CreateUIElements {
             return label
     }
     
-    static func makeButton(backgroundColor: UIColor, titleColor: UIColor, title: String) -> UIButton {
+    static func makeButton(
+        backgroundColor: UIColor,
+        titleColor: UIColor,
+        title: String
+    ) -> UIButton {
         let button = UIButton()
         button.backgroundColor = backgroundColor
         
@@ -89,4 +99,42 @@ class CreateUIElements {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
+    
+    static func createInputMessageField() -> UITextView {
+        let textView = UITextView()
+        textView.isScrollEnabled = false
+        textView.font = UIFont.systemFont(ofSize: 18)
+        
+        textView.backgroundColor = UIColor(hex: "F6F6F6")
+        textView.layer.cornerRadius = 8
+        textView.layer.borderColor = UIColor(hex: "F6F6F6").cgColor
+        textView.layer.borderWidth = 1.0
+        textView.layer.masksToBounds = true
+        textView.keyboardType = .default
+
+        textView.textColor = UIColor(hex: "A4A4A4")
+        textView.layer.shadowColor = UIColor.gray.cgColor
+        textView.layer.shadowOpacity = 0.3
+        textView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        textView.layer.shadowRadius = 4
+
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }
+    
+    static func createSendButton() -> UIButton {
+        let button = UIButton()
+        
+        var buttonConfig = UIButton.Configuration.plain()
+        buttonConfig.image = UIImage(systemName: "paperplane.fill")
+        buttonConfig.imagePlacement = .all
+        buttonConfig.imagePadding = 0
+        buttonConfig.baseForegroundColor = UIColor(hex: "412dc4")
+        
+        button.configuration = buttonConfig
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }
+    
 }
