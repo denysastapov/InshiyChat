@@ -5,7 +5,7 @@ https://github.com/denysastapov/InshiyChat/assets/38051100/a1b6674c-743d-4f7b-a3
 The project is under construction
 
 ## Project Overview
-ChatApp is a modern iOS chat application built using the MVVM (Model-View-ViewModel) architecture. It offers a sleek and minimalist design aimed at providing users with an intuitive and pleasant chatting experience. By adhering to MVVM principles, the codebase is organized, maintainable, and scalable.
+InshiyChat is a modern iOS chat application built using the MVVM (Model-View-ViewModel) architecture. It offers a sleek and minimalist design aimed at providing users with an intuitive and pleasant chatting experience. By adhering to MVVM principles, the codebase is organized, maintainable, and scalable.
 
 ## Key Features
 ### MVVM Architecture
